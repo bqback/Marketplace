@@ -1,0 +1,38 @@
+volumes:
+  prometheus_data: {}
+
+services:
+  server:
+    build: 
+      context: .
+      dockerfile: ./deployments/backend/Dockerfile
+    container_name: marketplace-backend
+    ports: 
+      - 8080:8080
+    tty: true
+    depends_on:
+      db:
+        condition: service_healthy
+    links:
+      - db 
+    command: >
+        sh -c "echo 'Migrating main database' &&
+              ./tern migrate -c db/migrations/public/tern.conf -m db/migrations/public/ &&
+              echo 'Finished main database migrations' &&
+              echo 'Starting backend' &&
+              ./marketplace-backend"
+    env_file:
+      - ./config/.env
+  
+  db:
+    image: postgres:latest
+    container_name: marketplace-db
+    env_file:
+      - ./config/.env
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
