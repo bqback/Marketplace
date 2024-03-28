@@ -24,7 +24,7 @@ func ExtractFeedParams(next http.Handler) http.Handler {
 		// r.Get("/?sortby={sortby}&order={order}&page={page}&per={perpage}&minprice={minprice}&maxprice={maxprice}", handlers.FeedHandler.Feed)
 
 		sortTypeParam := chi.URLParam(r, "sortby")
-		sortType, ok := dto.ParamMap[sortTypeParam]
+		sortType, ok := dto.SortTypeMap[sortTypeParam]
 		if !ok {
 			logger.DebugFmt("Invalid sort type", requestID, funcName, nodeName)
 			apperrors.ReturnError(apperrors.BadRequestResponse, w, r)
@@ -32,7 +32,7 @@ func ExtractFeedParams(next http.Handler) http.Handler {
 		}
 
 		orderParam := chi.URLParam(r, "order")
-		order, ok := dto.ParamMap[orderParam]
+		order, ok := dto.SortOrderMap[orderParam]
 		if !ok {
 			logger.DebugFmt("Invalid sort order", requestID, funcName, nodeName)
 			apperrors.ReturnError(apperrors.BadRequestResponse, w, r)

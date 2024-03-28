@@ -13,7 +13,7 @@ type Services struct {
 
 func NewServices(storages *storage.Storages, manager *auth.AuthManager) *Services {
 	return &Services{
-		Auth:    authService.NewAuthService(storages.Auth, manager),
-		Listing: authService.NewListingService(storages.Listing),
+		Auth: authService.NewAuthService(storages.Auth, manager),
+		// Listing: authService.NewListingService(storages.Listing),
 	}
 }

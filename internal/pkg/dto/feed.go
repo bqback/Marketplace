@@ -31,9 +31,18 @@ type PriceRange struct {
 	Max *uint64
 }
 
-var ParamMap = map[string]int{
-	"asc":   AscSort,
-	"desc":  DescSort,
+var SortTypeMap = map[string]int{
+	"":      DateSort,
 	"date":  DateSort,
 	"price": PriceSort,
+}
+
+var SortOrderMap = map[string]int{
+	"asc":  AscSort,
+	"desc": DescSort,
+}
+
+var DefaultSort = map[int]int{
+	DateSort:  DescSort,
+	PriceSort: AscSort,
 }

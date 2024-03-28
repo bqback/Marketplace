@@ -22,7 +22,7 @@ type AuthHandler struct {
 //
 // @Param loginData body dto.LoginInfo true "Данные для авторизации"
 //
-// @Success 200  {object}  dto.JWT "JWT-токен для аутентификации пользователя"
+// @Success 204  {string}  "no content"
 // @Failure 400  {object}  apperrors.ErrorResponse
 // @Failure 401  {object}  apperrors.ErrorResponse
 // @Failure 500  {object}  apperrors.ErrorResponse
@@ -67,8 +67,8 @@ func (ah AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
-	w.Header().Add("Authorization", token.Token)
+	w.Header().Set("Authorization", token.Token)
+	w.WriteHeader(http.StatusNoContent)
 
 	r.Body.Close()
 }

@@ -2,10 +2,11 @@ package postgresql
 
 import (
 	"marketplace/internal/pkg/dto"
-	"strings"
 )
 
 var shortIDField = "id"
+
+var returnIDSuffix = "RETURNING " + shortIDField
 
 var userTable = "public.user"
 
@@ -17,19 +18,32 @@ var (
 )
 
 var (
-	allUserSelectFields = []string{userIdField, userLoginField, userHashField, userIsAdminField}
+	userShortLoginField = "login"
+	userShortHashField  = "password_hash"
 )
 
-var movieUpdateReturnSuffix = "RETURNING " + strings.Join(allMovieSelectFields, ", ")
+var (
+	allUserSelectFields = []string{userIdField, userLoginField, userHashField}
+	allUserInsertFields = []string{userShortLoginField, userShortHashField}
+)
 
 var (
-	actorMovieFields = []string{"id_actor", "id_movie"}
+	userListingFields = []string{"id_user", "id_listing"}
+)
+
+// public.listing fields
+var (
+	listingIdField          = "public.listing.id"
+	listingTitleField       = "public.listing.title"
+	listingDescriptionField = "public.listing.description"
+	listingImageLinkField   = "public.listing.image_link"
+	listingPriceField       = "public.listing.price"
+	listingDateCreatedField = "public.listing.date_created"
 )
 
 var SortOptionsMap = map[int]string{
-	dto.DateSort:    movieTitleField,
-	dto.PriceSort:   movieRatingField,
-	dto.ReleaseSort: movieReleaseField,
+	dto.DateSort:  listingDateCreatedField,
+	dto.PriceSort: listingPriceField,
 }
 
 var SortOrderMap = map[int]string{

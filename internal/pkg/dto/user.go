@@ -7,7 +7,7 @@ type NewUserInfo struct {
 }
 
 type DBUser struct {
-	ID           uint64 `json:"id"`
-	Login        string `json:"login"`
-	PasswordHash string `json:"password_hash"`
+	ID           uint64
+	Login        string
+	PasswordHash string `db:"password_hash"`
 }

@@ -24,7 +24,7 @@ func SetupMux(handlers *handlers.Handlers, config *config.Config, logger *loggin
 	manager := auth.NewManager(config.JWT)
 	authMW := middleware.NewAuthMiddleware(manager)
 
-	mux.Use(middleware.NewLogger(logger), middleware.RequestID, middleware.PanicRecovery, middleware.JsonHeader)
+	mux.Use(middleware.RequestID, middleware.NewLogger(logger), middleware.PanicRecovery, middleware.JsonHeader)
 
 	mux.Route(baseUrl, func(r chi.Router) {
 		r.Route("/auth", func(r chi.Router) {

@@ -67,3 +67,41 @@ func (s *PgAuthStorage) Auth(ctx context.Context, info dto.LoginInfo) (*entities
 
 	return &user, nil
 }
+
+func (s *PgAuthStorage) Register(ctx context.Context, info dto.SignupInfo) (*entities.User, error) {
+	logger, requestID, err := utils.GetLoggerAndID(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	funcName := "Register"
+
+	newUser := &entities.User{
+		Login: info.Login,
+	}
+
+	query, args, err := squirrel.
+		Insert(userTable).
+		Columns(allUserInsertFields...).
+		Values(info.Login, info.Password).
+		PlaceholderFormat(squirrel.Dollar).
+		Suffix(returnIDSuffix).
+		ToSql()
+	if err != nil {
+		logger.DebugFmt("Failed to build query with error "+err.Error(), requestID, funcName, nodeName)
+		return nil, apperrors.ErrCouldNotBuildQuery
+	}
+	logger.DebugFmt("Query built", requestID, funcName, nodeName)
+
+	var userID int
+	row := s.db.QueryRow(query, args...)
+	if err := row.Scan(&userID); err != nil {
+		logger.DebugFmt("Actor insert failed with error "+err.Error(), requestID, funcName, nodeName)
+		return nil, apperrors.ErrActorNotCreated
+	}
+	logger.DebugFmt("Actor created", requestID, funcName, nodeName)
+
+	newUser.ID = uint64(userID)
+
+	return newUser, nil
+}

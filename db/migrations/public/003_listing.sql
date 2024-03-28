@@ -1,12 +1,15 @@
-CREATE TABLE IF NOT EXISTS public.actor
+CREATE TABLE IF NOT EXISTS public.listing
 (
     id serial NOT NULL,
-    name text NOT NULL,
-    gender text NOT NULL,
-    dob date NOT NULL, 
-    CONSTRAINT actor_pkey PRIMARY KEY (id)
+    title text NOT NULL,
+    description text,
+    image_link text,
+    price int NOT NULL,
+    date_created date NOT NULL,
+    CONSTRAINT price CHECK (price >= 0), 
+    CONSTRAINT listing_pkey PRIMARY KEY (id)
 );
 
 ---- create above / drop below ----
 
-DROP TABLE IF EXISTS public.actor;
+DROP TABLE IF EXISTS public.listing;
