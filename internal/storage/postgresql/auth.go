@@ -96,10 +96,10 @@ func (s *PgAuthStorage) Register(ctx context.Context, info dto.SignupInfo) (*ent
 	var userID int
 	row := s.db.QueryRow(query, args...)
 	if err := row.Scan(&userID); err != nil {
-		logger.DebugFmt("Actor insert failed with error "+err.Error(), requestID, funcName, nodeName)
-		return nil, apperrors.ErrActorNotCreated
+		logger.DebugFmt("User insert failed with error "+err.Error(), requestID, funcName, nodeName)
+		return nil, apperrors.ErrUserNotCreated
 	}
-	logger.DebugFmt("Actor created", requestID, funcName, nodeName)
+	logger.DebugFmt("User created", requestID, funcName, nodeName)
 
 	newUser.ID = uint64(userID)
 

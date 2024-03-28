@@ -27,9 +27,13 @@ var (
 	allUserInsertFields = []string{userShortLoginField, userShortHashField}
 )
 
+var userListingTable = "public.user_listing"
+
 var (
 	userListingFields = []string{"id_user", "id_listing"}
 )
+
+var listingTable = "public.listing"
 
 // public.listing fields
 var (
@@ -39,6 +43,18 @@ var (
 	listingImageLinkField   = "public.listing.image_link"
 	listingPriceField       = "public.listing.price"
 	listingDateCreatedField = "public.listing.date_created"
+)
+
+var (
+	listingShortTitleField       = "title"
+	listingShortDescriptionField = "description"
+	listingShortImageLinkField   = "image_link"
+	listingShortPriceField       = "price"
+	listingShortDateCreatedField = "date_created"
+)
+
+var (
+	allListingInsertFields = []string{listingShortTitleField, listingShortDescriptionField, listingShortImageLinkField, listingShortPriceField, listingShortDateCreatedField}
 )
 
 var SortOptionsMap = map[int]string{

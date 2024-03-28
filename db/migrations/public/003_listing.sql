@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS public.listing
     description text,
     image_link text,
     price int NOT NULL,
-    date_created date NOT NULL,
+    date_created timestamp without timezone NOT NULL,
     CONSTRAINT price CHECK (price >= 0), 
     CONSTRAINT listing_pkey PRIMARY KEY (id)
 );

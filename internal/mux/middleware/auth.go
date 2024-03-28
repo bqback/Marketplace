@@ -43,7 +43,7 @@ func (am AuthMiddleware) Auth(next http.Handler) http.Handler {
 		}
 		logger.DebugFmt("Token validated", requestID, funcName, nodeName)
 
-		rCtx := context.WithValue(r.Context(), dto.IDKey, userId)
+		rCtx := context.WithValue(r.Context(), dto.UserIDKey, userId)
 
 		next.ServeHTTP(w, r.WithContext(rCtx))
 	})
@@ -72,7 +72,7 @@ func (am AuthMiddleware) OptionalAuth(next http.Handler) http.Handler {
 		}
 		logger.DebugFmt("Token validated", requestID, funcName, nodeName)
 
-		rCtx = context.WithValue(rCtx, dto.IDKey, userId)
+		rCtx = context.WithValue(rCtx, dto.UserIDKey, userId)
 
 		next.ServeHTTP(w, r.WithContext(rCtx))
 	})

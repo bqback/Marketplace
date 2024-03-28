@@ -30,14 +30,14 @@ func GetReqID(ctx context.Context) (string, error) {
 	return "", apperrors.ErrRequestIDMissing
 }
 
-func GetIDParam(ctx context.Context) (uint64, error) {
+func GetUserID(ctx context.Context) (uint64, error) {
 	if ctx == nil {
 		return 0, apperrors.ErrNilContext
 	}
-	if id, ok := ctx.Value(dto.IDKey).(uint64); ok {
+	if id, ok := ctx.Value(dto.UserIDKey).(uint64); ok {
 		return id, nil
 	}
-	return 0, apperrors.ErrURLParamMissing
+	return 0, apperrors.ErrUserIDMissing
 }
 
 func GetFeedOpts(ctx context.Context) (dto.FeedOptions, error) {

@@ -4,7 +4,7 @@ const (
 	ErrorKey Key = iota
 	LoggerKey
 	RequestIDKey
-	IDKey
+	UserIDKey
 	FeedOptionsKey
 	IsAuthorizedKey
 )

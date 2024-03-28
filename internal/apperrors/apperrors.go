@@ -21,7 +21,7 @@ var (
 
 var (
 	ErrCouldNotParseURLParam = errors.New("failed to parse URL params")
-	ErrURLParamMissing       = errors.New("url param is missing from context")
+	ErrUserIDMissing         = errors.New("user ID is missing from context")
 )
 
 var (
@@ -42,26 +42,16 @@ var (
 )
 
 var (
-	ErrActorNotCreated  = errors.New("failed to insert actor into database")
-	ErrActorNotSelected = errors.New("failed to select actor from database")
-	ErrActorNotUpdated  = errors.New("failed to update actor in database")
-	ErrActorNotDeleted  = errors.New("failed to delete actor from database")
+	ErrListingNotCreated  = errors.New("failed to insert listing into database")
+	ErrListingNotSelected = errors.New("failed to select listing from database")
 )
 
 var (
-	ErrMovieNotCreated  = errors.New("failed to insert movie into database")
-	ErrMovieNotSelected = errors.New("failed to select movie from database")
-	ErrMovieNotUpdated  = errors.New("failed to update movie in database")
-	ErrMovieNotDeleted  = errors.New("failed to delete movie from database")
+	ErrCouldNotLinkListing = errors.New("failed to link listing to user")
 )
 
 var (
-	ErrCouldNotLinkActor      = errors.New("failed to link actor to movie")
-	ErrActorMoviesNotSelected = errors.New("failed to get actor's movies")
-	ErrMovieActorsNotSelected = errors.New("failed to get movie's actors")
-)
-
-var (
+	ErrUserNotCreated  = errors.New("failed to insert user into database")
 	ErrUserNotSelected = errors.New("failed to select user")
 	ErrWrongPassword   = errors.New("wrong password")
 )

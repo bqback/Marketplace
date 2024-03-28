@@ -1,6 +1,6 @@
 module marketplace
 
-go 1.22.0
+go 1.22
 
 require (
 	github.com/Masterminds/squirrel v1.5.4
