@@ -3,6 +3,7 @@ package postgresql
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"marketplace/internal/apperrors"
 	"marketplace/internal/pkg/dto"
 	"marketplace/internal/pkg/entities"
@@ -22,7 +23,7 @@ func NewListingStorage(db *sqlx.DB) *PgListingStorage {
 	}
 }
 
-func (s *PgListingStorage) GetListings(ctx context.Context, opts dto.FeedOptions) ([]*entities.Listing, error) {
+func (s *PgListingStorage) GetFeed(ctx context.Context, opts dto.FeedOptions) ([]*dto.FeedListingInfo, error) {
 	return nil, nil
 }
 
@@ -81,10 +82,9 @@ func (s *PgListingStorage) Create(ctx context.Context, info dto.NewListingInfo) 
 
 	query2, args, err := squirrel.
 		Insert(userListingTable).
-		Columns(userListingFields...).
+		Columns("id_user", "id_listing").
 		Values(userID, listingID).
 		PlaceholderFormat(squirrel.Dollar).
-		Suffix(returnIDSuffix).
 		ToSql()
 	if err != nil {
 		logger.DebugFmt("Failed to build query with error "+err.Error(), requestID, funcName, nodeName)
@@ -95,6 +95,9 @@ func (s *PgListingStorage) Create(ctx context.Context, info dto.NewListingInfo) 
 		return nil, apperrors.ErrCouldNotBuildQuery
 	}
 	logger.DebugFmt("Query built", requestID, funcName, nodeName)
+
+	logger.Debug(query2)
+	logger.Debug(fmt.Sprintf("%v", args))
 
 	_, err = tx.Exec(query2, args)
 	if err != nil {

@@ -13,7 +13,7 @@ type Storages struct {
 
 func NewPostgresStorages(db *sqlx.DB) *Storages {
 	return &Storages{
-		Auth: postgresql.NewAuthStorage(db),
-		// Listing: postgresql.NewListingStorage(db),
+		Auth:    postgresql.NewAuthStorage(db),
+		Listing: postgresql.NewListingStorage(db),
 	}
 }

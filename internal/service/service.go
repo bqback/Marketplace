@@ -3,6 +3,7 @@ package service
 import (
 	"marketplace/internal/auth"
 	authService "marketplace/internal/service/auth"
+	listingService "marketplace/internal/service/listing"
 	"marketplace/internal/storage"
 )
 
@@ -13,7 +14,7 @@ type Services struct {
 
 func NewServices(storages *storage.Storages, manager *auth.AuthManager) *Services {
 	return &Services{
-		Auth: authService.NewAuthService(storages.Auth, manager),
-		// Listing: authService.NewListingService(storages.Listing),
+		Auth:    authService.NewAuthService(storages.Auth, manager),
+		Listing: listingService.NewListingService(storages.Listing),
 	}
 }

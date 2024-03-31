@@ -45,6 +45,7 @@ func (lh ListingHandler) Create(w http.ResponseWriter, r *http.Request) {
 		apperrors.ReturnError(apperrors.BadRequestResponse, w, r)
 		return
 	}
+	logger.DebugFmt("Request parsed", requestID, funcName, nodeName)
 
 	// err = validate.Struct(newActor)
 	// if err != nil {
@@ -127,7 +128,7 @@ func (lh ListingHandler) Feed(w http.ResponseWriter, r *http.Request) {
 	// 	return
 	// }
 
-	listings, err := lh.ls.GetListings(rCtx, options)
+	listings, err := lh.ls.GetFeed(rCtx, options)
 	if err != nil {
 		logger.DebugFmt("Failed to get feed listings: "+err.Error(), requestID, funcName, nodeName)
 		apperrors.ReturnError(apperrors.InternalServerErrorResponse, w, r)

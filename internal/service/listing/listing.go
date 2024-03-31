@@ -21,6 +21,11 @@ func (s *ListingService) Create(ctx context.Context, info dto.NewListingInfo) (*
 	return s.ls.Create(ctx, info)
 }
 
-func (s *ListingService) GetListings(ctx context.Context, opts dto.FeedOptions) ([]*entities.Listing, error) {
-	return s.ls.GetListings(ctx, opts)
+func (s *ListingService) GetFeed(ctx context.Context, opts dto.FeedOptions) ([]*dto.FeedListingInfo, error) {
+	listings, err := s.ls.GetFeed(ctx, opts)
+	if err != nil {
+		return nil, err
+	}
+
+	return listings, err
 }

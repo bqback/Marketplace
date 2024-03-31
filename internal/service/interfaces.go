@@ -8,7 +8,7 @@ import (
 
 type IListingService interface {
 	Create(context.Context, dto.NewListingInfo) (*entities.Listing, error)
-	GetListings(context.Context, dto.FeedOptions) ([]*entities.Listing, error)
+	GetFeed(context.Context, dto.FeedOptions) ([]*dto.FeedListingInfo, error)
 }
 
 type IAuthService interface {

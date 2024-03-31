@@ -28,10 +28,7 @@ var (
 )
 
 var userListingTable = "public.user_listing"
-
-var (
-	userListingFields = []string{"id_user", "id_listing"}
-)
+var userListingFields = []string{"id_user", "id_listing"}
 
 var listingTable = "public.listing"
 

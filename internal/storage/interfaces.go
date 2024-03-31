@@ -7,7 +7,7 @@ import (
 )
 
 type IListingStorage interface {
-	GetListings(context.Context, dto.FeedOptions) ([]*entities.Listing, error)
+	GetFeed(context.Context, dto.FeedOptions) ([]*dto.FeedListingInfo, error)
 	Create(context.Context, dto.NewListingInfo) (*entities.Listing, error)
 }
 
